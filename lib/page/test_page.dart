@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:twitter_clone2/controller/auth_controller.dart';
+import 'package:twitter_clone2/controller/user_controller.dart';
+import 'package:twitter_clone2/model/user_state.dart';
 import 'package:twitter_clone2/widget/rounded_btn.dart';
 
 class TestPage extends ConsumerWidget {
@@ -8,16 +10,19 @@ class TestPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final asyncValueuserState = ref.watch(userStateProvider);
+    final asyncValueuserState = ref.watch(userStateProvider('null'));
 
     TextEditingController _emailController = TextEditingController();
     TextEditingController _passwordController = TextEditingController();
+
+    final UserState? user = asyncValueuserState.value;
 
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             Text('テスト'),
+            (user != null) ? Text(user.name!) : Text('なし'),
             Center(
               child: asyncValueuserState.when(
                 data: (user) {

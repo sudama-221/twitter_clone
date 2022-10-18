@@ -19,7 +19,7 @@ abstract class BaseAuthRepository {
   Future<void> signOut();
 }
 
-final authRepositoryProvider = Provider<AuthRepository>((ref) {
+final authRepositoryProvider = Provider.autoDispose<AuthRepository>((ref) {
   return AuthRepository(ref.read);
 });
 
@@ -37,21 +37,7 @@ class AuthRepository implements BaseAuthRepository {
     final doc = _read(firebaseFirestoreProvider).collection('users').doc(uid);
     final data = await doc.get();
 
-    String? email;
-    String? name;
-    String? discription;
-
-    if (data['email'] != null) {
-      email = data['email'];
-    }
-    if (data['name'] != null) {
-      name = data['name'];
-    }
-    if (data['discription'] != null) {
-      discription = data['discription'];
-    }
-
-    return UserState(email: email, name: name, discription: discription);
+    return UserState.fromDoc(data);
   }
 
   // ログイン

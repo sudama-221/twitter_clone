@@ -5,6 +5,8 @@ import 'package:twitter_clone2/firebase_options.dart';
 import 'package:twitter_clone2/page/auth_check.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:twitter_clone2/page/test_page.dart';
+import 'package:twitter_clone2/test/container1_page.dart';
+import 'package:twitter_clone2/test/testFeed_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,8 +31,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const TestPage(),
-      // home: const AuthCheckPage(),
+      home: const AuthCheckPage(),
+      // home: Container1(),
     );
   }
 }

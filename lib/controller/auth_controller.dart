@@ -7,31 +7,22 @@ import 'package:twitter_clone2/model/user_state.dart';
 import 'package:twitter_clone2/repository/auth_repository.dart';
 
 // 現在のログイン情報を監視
-final authStateProvider = StreamProvider<User?>((ref) {
+final authStateProvider = StreamProvider.autoDispose<User?>((ref) {
   return ref.read(authRepositoryProvider).authStateChanges;
 });
 
-// ログイン状況の把握とログインしていればそのユーザーのIDを取得　stringでIDを返す
-// ログイン情報が変化するとこの中も再描画
-final currentUserProvider = Provider<String?>((ref) {
-  final auth = ref.watch(authStateProvider);
-  if (auth.asData?.value?.uid != null) {
-    return auth.asData?.value?.uid;
-  } else {
-    return null;
-  }
+// ログイン関係の処理
+final currentUserProvider =
+    StateNotifierProvider<currentUserControllerNotifier, User?>((ref) {
+  return currentUserControllerNotifier(ref.read);
 });
 
-// ↑で再描画されたのを通知されてユーザーのデータを取得する
-final userStateProvider = FutureProvider<UserState?>((ref) async {
-  final userId = ref.watch(currentUserProvider);
-  if (userId != null) {
-    var userData = await ref.read(authRepositoryProvider).feachUser(userId);
-    return userData;
-  } else {
-    return null;
-  }
-});
+class currentUserControllerNotifier extends StateNotifier<User?> {
+  final Reader _read;
+  currentUserControllerNotifier(this._read) : super(null);
+
+  User? get state => _read(authRepositoryProvider).getCurrentUser();
+}
 
 // ログイン関係の処理
 final authControllerProvider =
@@ -43,6 +34,7 @@ class AuthControllerNotifier extends StateNotifier<UserState?> {
   final Reader _read;
   AuthControllerNotifier(this._read) : super(null);
 
+  // 新規登録
   Future<void> signUp(String name, String email, String password) async {
     try {
       final userCredential =
@@ -54,14 +46,21 @@ class AuthControllerNotifier extends StateNotifier<UserState?> {
 
         // firestoreに追加
         final doc = FirebaseFirestore.instance.collection('users').doc(uid);
-        await doc.set(
-            {'uid': uid, 'email': email, 'name': name, 'discription': null});
+        await doc.set({
+          'uid': uid,
+          'email': email,
+          'name': name,
+          'discription': '',
+          'coverImageUrl': '',
+          'profileImageUrl': '',
+        });
       }
     } catch (e) {
       throw e.toString();
     }
   }
 
+  // ログイン
   Future<void> signIn(String email, String password) async {
     try {
       await _read(authRepositoryProvider).signInWithEmail(email, password);
