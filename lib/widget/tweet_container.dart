@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/controller/user_controller.dart';
-import 'package:twitter_clone2/model/tweet_state.dart';
-import 'package:twitter_clone2/model/user_state.dart';
-import 'package:twitter_clone2/util/color.dart';
-import 'package:twitter_clone2/widget/tweet/like_btn.dart';
+import 'package:twiiter_clone2/controller/user_controller.dart';
+import 'package:twiiter_clone2/model/tweet_state.dart';
+import 'package:twiiter_clone2/model/user_state.dart';
+import 'package:twiiter_clone2/util/color.dart';
+import 'package:twiiter_clone2/widget/tweet/like_btn.dart';
 
 class TweetContainer extends ConsumerWidget {
   final TweetState tweetState;
@@ -16,7 +16,6 @@ class TweetContainer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     UserState? author =
         ref.watch(userStateProvider(tweetState.authorId!)).value;
-    print('いいね ${tweetState.likes}');
     if (author != null) {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),

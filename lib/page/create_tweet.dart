@@ -1,17 +1,15 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/controller/auth_controller.dart';
-import 'package:twitter_clone2/controller/image_pick_controller.dart';
-import 'package:twitter_clone2/controller/loading_controller.dart';
-import 'package:twitter_clone2/controller/tweet_controller.dart';
-import 'package:twitter_clone2/model/image_state.dart';
-import 'package:twitter_clone2/model/tweet_state.dart';
-import 'package:twitter_clone2/util/color.dart';
-import 'package:twitter_clone2/widget/rounded_btn.dart';
+import 'package:twiiter_clone2/controller/auth_controller.dart';
+import 'package:twiiter_clone2/controller/image_pick_controller.dart';
+import 'package:twiiter_clone2/controller/loading_controller.dart';
+import 'package:twiiter_clone2/controller/tweet_controller.dart';
+import 'package:twiiter_clone2/model/image_state.dart';
+import 'package:twiiter_clone2/model/tweet_state.dart';
+import 'package:twiiter_clone2/util/color.dart';
+import 'package:twiiter_clone2/widget/rounded_btn.dart';
 
 class CreateTweetPage extends ConsumerWidget {
   const CreateTweetPage({Key? key}) : super(key: key);
@@ -19,7 +17,7 @@ class CreateTweetPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     String? _imagePickedType;
-    Reader _read = ref.read;
+    final _read = ref.read;
     TextEditingController _tweetController = TextEditingController();
 
     ImageState imageState;

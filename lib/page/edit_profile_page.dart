@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/controller/image_pick_controller.dart';
-import 'package:twitter_clone2/controller/loading_controller.dart';
-import 'package:twitter_clone2/controller/user_controller.dart';
-import 'package:twitter_clone2/model/image_state.dart';
-import 'package:twitter_clone2/model/user_state.dart';
-import 'package:twitter_clone2/util/color.dart';
+import 'package:twiiter_clone2/controller/image_pick_controller.dart';
+import 'package:twiiter_clone2/controller/loading_controller.dart';
+import 'package:twiiter_clone2/controller/user_controller.dart';
+import 'package:twiiter_clone2/model/image_state.dart';
+import 'package:twiiter_clone2/model/user_state.dart';
+import 'package:twiiter_clone2/util/color.dart';
 
 class EditProfilePage extends ConsumerStatefulWidget {
   const EditProfilePage({
@@ -59,7 +59,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
     }
   }
 
-  saveProfile(Reader _read, ImageState imageState) async {
+  saveProfile(_read, ImageState imageState) async {
 // 保存
     _formKey.currentState!.save();
     if (_formKey.currentState!.validate() && !_isLoading) {
@@ -106,7 +106,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
     ImageState imageState = ref.watch(imagePickProvider);
     bool _isLoading = ref.watch(LoadingProvider);
 
-    Reader _read = ref.read;
+    final _read = ref.read;
 
     return Scaffold(
       body: ListView(

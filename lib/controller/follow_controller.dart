@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/controller/base_auth_controller.dart';
-import 'package:twitter_clone2/repository/user_repository.dart';
+import 'package:twiiter_clone2/controller/base_auth_controller.dart';
+import 'package:twiiter_clone2/repository/user_repository.dart';
 
 // 現在のフォローしている人情報を監視
 final followingStateProvider =
@@ -19,17 +19,18 @@ final followerStateProvider =
 // フォロー関係の処理
 final followControllerProvider =
     StateNotifierProvider<FollowControllerNotifier, bool>((ref) {
-  return FollowControllerNotifier(ref.read);
+  return FollowControllerNotifier(ref);
 });
 
 class FollowControllerNotifier extends StateNotifier<bool> {
-  final Reader _read;
-  FollowControllerNotifier(this._read) : super(false);
+  final Ref _ref;
+  FollowControllerNotifier(this._ref) : super(false);
 
   // フォローする
   Future<void> followUser(String currentUserId, String visitedUserId) async {
     try {
-      await _read(userRepositoryProvider)
+      await _ref
+          .read(userRepositoryProvider)
           .followUser(currentUserId, visitedUserId);
       state = true;
     } catch (e) {
@@ -40,7 +41,8 @@ class FollowControllerNotifier extends StateNotifier<bool> {
   // フォロー外す
   Future<void> unFollowUser(String currentUserId, String visitedUserId) async {
     try {
-      await _read(userRepositoryProvider)
+      await _ref
+          .read(userRepositoryProvider)
           .unFollowUser(currentUserId, visitedUserId);
       state = false;
     } catch (e) {
@@ -51,7 +53,8 @@ class FollowControllerNotifier extends StateNotifier<bool> {
   // currentUserがvisitedUserをフォローしているか
   Future<bool> isFollowingUser(
       String currentUserId, String visitedUserId) async {
-    state = await _read(userRepositoryProvider)
+    state = await _ref
+        .read(userRepositoryProvider)
         .isFollowingUser(currentUserId, visitedUserId);
     return state;
   }

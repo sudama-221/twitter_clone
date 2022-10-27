@@ -24,6 +24,9 @@ mixin _$TweetState {
   String? get imageUrl => throw _privateConstructorUsedError;
   int? get likes => throw _privateConstructorUsedError;
   int? get retweets => throw _privateConstructorUsedError;
+  bool? get isLiked =>
+      throw _privateConstructorUsedError; // ログインしているユーザーがいいねしているか
+  bool? get isRetweet => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TweetStateCopyWith<TweetState> get copyWith =>
@@ -34,7 +37,8 @@ mixin _$TweetState {
 abstract class $TweetStateCopyWith<$Res> {
   factory $TweetStateCopyWith(
           TweetState value, $Res Function(TweetState) then) =
-      _$TweetStateCopyWithImpl<$Res>;
+      _$TweetStateCopyWithImpl<$Res, TweetState>;
+  @useResult
   $Res call(
       {String? id,
       String? authorId,
@@ -43,17 +47,22 @@ abstract class $TweetStateCopyWith<$Res> {
       String? text,
       String? imageUrl,
       int? likes,
-      int? retweets});
+      int? retweets,
+      bool? isLiked,
+      bool? isRetweet});
 }
 
 /// @nodoc
-class _$TweetStateCopyWithImpl<$Res> implements $TweetStateCopyWith<$Res> {
+class _$TweetStateCopyWithImpl<$Res, $Val extends TweetState>
+    implements $TweetStateCopyWith<$Res> {
   _$TweetStateCopyWithImpl(this._value, this._then);
 
-  final TweetState _value;
   // ignore: unused_field
-  final $Res Function(TweetState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
@@ -64,41 +73,51 @@ class _$TweetStateCopyWithImpl<$Res> implements $TweetStateCopyWith<$Res> {
     Object? imageUrl = freezed,
     Object? likes = freezed,
     Object? retweets = freezed,
+    Object? isLiked = freezed,
+    Object? isRetweet = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      authorId: authorId == freezed
+      authorId: freezed == authorId
           ? _value.authorId
           : authorId // ignore: cast_nullable_to_non_nullable
               as String?,
-      timestamp: timestamp == freezed
+      timestamp: freezed == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
               as Timestamp?,
-      createdAt: createdAt == freezed
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      text: text == freezed
+      text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageUrl: imageUrl == freezed
+      imageUrl: freezed == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      likes: likes == freezed
+      likes: freezed == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
               as int?,
-      retweets: retweets == freezed
+      retweets: freezed == retweets
           ? _value.retweets
           : retweets // ignore: cast_nullable_to_non_nullable
               as int?,
-    ));
+      isLiked: freezed == isLiked
+          ? _value.isLiked
+          : isLiked // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isRetweet: freezed == isRetweet
+          ? _value.isRetweet
+          : isRetweet // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ) as $Val);
   }
 }
 
@@ -109,6 +128,7 @@ abstract class _$$_TweetStateCopyWith<$Res>
           _$_TweetState value, $Res Function(_$_TweetState) then) =
       __$$_TweetStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? id,
       String? authorId,
@@ -117,19 +137,20 @@ abstract class _$$_TweetStateCopyWith<$Res>
       String? text,
       String? imageUrl,
       int? likes,
-      int? retweets});
+      int? retweets,
+      bool? isLiked,
+      bool? isRetweet});
 }
 
 /// @nodoc
-class __$$_TweetStateCopyWithImpl<$Res> extends _$TweetStateCopyWithImpl<$Res>
+class __$$_TweetStateCopyWithImpl<$Res>
+    extends _$TweetStateCopyWithImpl<$Res, _$_TweetState>
     implements _$$_TweetStateCopyWith<$Res> {
   __$$_TweetStateCopyWithImpl(
       _$_TweetState _value, $Res Function(_$_TweetState) _then)
-      : super(_value, (v) => _then(v as _$_TweetState));
+      : super(_value, _then);
 
-  @override
-  _$_TweetState get _value => super._value as _$_TweetState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
@@ -140,40 +161,50 @@ class __$$_TweetStateCopyWithImpl<$Res> extends _$TweetStateCopyWithImpl<$Res>
     Object? imageUrl = freezed,
     Object? likes = freezed,
     Object? retweets = freezed,
+    Object? isLiked = freezed,
+    Object? isRetweet = freezed,
   }) {
     return _then(_$_TweetState(
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      authorId: authorId == freezed
+      authorId: freezed == authorId
           ? _value.authorId
           : authorId // ignore: cast_nullable_to_non_nullable
               as String?,
-      timestamp: timestamp == freezed
+      timestamp: freezed == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
               as Timestamp?,
-      createdAt: createdAt == freezed
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      text: text == freezed
+      text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageUrl: imageUrl == freezed
+      imageUrl: freezed == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      likes: likes == freezed
+      likes: freezed == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
               as int?,
-      retweets: retweets == freezed
+      retweets: freezed == retweets
           ? _value.retweets
           : retweets // ignore: cast_nullable_to_non_nullable
               as int?,
+      isLiked: freezed == isLiked
+          ? _value.isLiked
+          : isLiked // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isRetweet: freezed == isRetweet
+          ? _value.isRetweet
+          : isRetweet // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -189,7 +220,9 @@ class _$_TweetState implements _TweetState {
       this.text,
       this.imageUrl,
       this.likes,
-      this.retweets});
+      this.retweets,
+      this.isLiked,
+      this.isRetweet});
 
   @override
   final String? id;
@@ -207,10 +240,15 @@ class _$_TweetState implements _TweetState {
   final int? likes;
   @override
   final int? retweets;
+  @override
+  final bool? isLiked;
+// ログインしているユーザーがいいねしているか
+  @override
+  final bool? isRetweet;
 
   @override
   String toString() {
-    return 'TweetState(id: $id, authorId: $authorId, timestamp: $timestamp, createdAt: $createdAt, text: $text, imageUrl: $imageUrl, likes: $likes, retweets: $retweets)';
+    return 'TweetState(id: $id, authorId: $authorId, timestamp: $timestamp, createdAt: $createdAt, text: $text, imageUrl: $imageUrl, likes: $likes, retweets: $retweets, isLiked: $isLiked, isRetweet: $isRetweet)';
   }
 
   @override
@@ -218,30 +256,31 @@ class _$_TweetState implements _TweetState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TweetState &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.authorId, authorId) &&
-            const DeepCollectionEquality().equals(other.timestamp, timestamp) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.text, text) &&
-            const DeepCollectionEquality().equals(other.imageUrl, imageUrl) &&
-            const DeepCollectionEquality().equals(other.likes, likes) &&
-            const DeepCollectionEquality().equals(other.retweets, retweets));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.authorId, authorId) ||
+                other.authorId == authorId) &&
+            (identical(other.timestamp, timestamp) ||
+                other.timestamp == timestamp) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.text, text) || other.text == text) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl) &&
+            (identical(other.likes, likes) || other.likes == likes) &&
+            (identical(other.retweets, retweets) ||
+                other.retweets == retweets) &&
+            (identical(other.isLiked, isLiked) || other.isLiked == isLiked) &&
+            (identical(other.isRetweet, isRetweet) ||
+                other.isRetweet == isRetweet));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(authorId),
-      const DeepCollectionEquality().hash(timestamp),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(text),
-      const DeepCollectionEquality().hash(imageUrl),
-      const DeepCollectionEquality().hash(likes),
-      const DeepCollectionEquality().hash(retweets));
+  int get hashCode => Object.hash(runtimeType, id, authorId, timestamp,
+      createdAt, text, imageUrl, likes, retweets, isLiked, isRetweet);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TweetStateCopyWith<_$_TweetState> get copyWith =>
       __$$_TweetStateCopyWithImpl<_$_TweetState>(this, _$identity);
 }
@@ -255,7 +294,9 @@ abstract class _TweetState implements TweetState {
       final String? text,
       final String? imageUrl,
       final int? likes,
-      final int? retweets}) = _$_TweetState;
+      final int? retweets,
+      final bool? isLiked,
+      final bool? isRetweet}) = _$_TweetState;
 
   @override
   String? get id;
@@ -273,6 +314,10 @@ abstract class _TweetState implements TweetState {
   int? get likes;
   @override
   int? get retweets;
+  @override
+  bool? get isLiked;
+  @override // ログインしているユーザーがいいねしているか
+  bool? get isRetweet;
   @override
   @JsonKey(ignore: true)
   _$$_TweetStateCopyWith<_$_TweetState> get copyWith =>

@@ -29,18 +29,22 @@ mixin _$ImageState {
 abstract class $ImageStateCopyWith<$Res> {
   factory $ImageStateCopyWith(
           ImageState value, $Res Function(ImageState) then) =
-      _$ImageStateCopyWithImpl<$Res>;
+      _$ImageStateCopyWithImpl<$Res, ImageState>;
+  @useResult
   $Res call({File? coverImg, File? profileImg, File? tweetImg});
 }
 
 /// @nodoc
-class _$ImageStateCopyWithImpl<$Res> implements $ImageStateCopyWith<$Res> {
+class _$ImageStateCopyWithImpl<$Res, $Val extends ImageState>
+    implements $ImageStateCopyWith<$Res> {
   _$ImageStateCopyWithImpl(this._value, this._then);
 
-  final ImageState _value;
   // ignore: unused_field
-  final $Res Function(ImageState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? coverImg = freezed,
@@ -48,19 +52,19 @@ class _$ImageStateCopyWithImpl<$Res> implements $ImageStateCopyWith<$Res> {
     Object? tweetImg = freezed,
   }) {
     return _then(_value.copyWith(
-      coverImg: coverImg == freezed
+      coverImg: freezed == coverImg
           ? _value.coverImg
           : coverImg // ignore: cast_nullable_to_non_nullable
               as File?,
-      profileImg: profileImg == freezed
+      profileImg: freezed == profileImg
           ? _value.profileImg
           : profileImg // ignore: cast_nullable_to_non_nullable
               as File?,
-      tweetImg: tweetImg == freezed
+      tweetImg: freezed == tweetImg
           ? _value.tweetImg
           : tweetImg // ignore: cast_nullable_to_non_nullable
               as File?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -71,19 +75,19 @@ abstract class _$$_ImageStateCopyWith<$Res>
           _$_ImageState value, $Res Function(_$_ImageState) then) =
       __$$_ImageStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({File? coverImg, File? profileImg, File? tweetImg});
 }
 
 /// @nodoc
-class __$$_ImageStateCopyWithImpl<$Res> extends _$ImageStateCopyWithImpl<$Res>
+class __$$_ImageStateCopyWithImpl<$Res>
+    extends _$ImageStateCopyWithImpl<$Res, _$_ImageState>
     implements _$$_ImageStateCopyWith<$Res> {
   __$$_ImageStateCopyWithImpl(
       _$_ImageState _value, $Res Function(_$_ImageState) _then)
-      : super(_value, (v) => _then(v as _$_ImageState));
+      : super(_value, _then);
 
-  @override
-  _$_ImageState get _value => super._value as _$_ImageState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? coverImg = freezed,
@@ -91,15 +95,15 @@ class __$$_ImageStateCopyWithImpl<$Res> extends _$ImageStateCopyWithImpl<$Res>
     Object? tweetImg = freezed,
   }) {
     return _then(_$_ImageState(
-      coverImg: coverImg == freezed
+      coverImg: freezed == coverImg
           ? _value.coverImg
           : coverImg // ignore: cast_nullable_to_non_nullable
               as File?,
-      profileImg: profileImg == freezed
+      profileImg: freezed == profileImg
           ? _value.profileImg
           : profileImg // ignore: cast_nullable_to_non_nullable
               as File?,
-      tweetImg: tweetImg == freezed
+      tweetImg: freezed == tweetImg
           ? _value.tweetImg
           : tweetImg // ignore: cast_nullable_to_non_nullable
               as File?,
@@ -129,21 +133,20 @@ class _$_ImageState implements _ImageState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ImageState &&
-            const DeepCollectionEquality().equals(other.coverImg, coverImg) &&
-            const DeepCollectionEquality()
-                .equals(other.profileImg, profileImg) &&
-            const DeepCollectionEquality().equals(other.tweetImg, tweetImg));
+            (identical(other.coverImg, coverImg) ||
+                other.coverImg == coverImg) &&
+            (identical(other.profileImg, profileImg) ||
+                other.profileImg == profileImg) &&
+            (identical(other.tweetImg, tweetImg) ||
+                other.tweetImg == tweetImg));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(coverImg),
-      const DeepCollectionEquality().hash(profileImg),
-      const DeepCollectionEquality().hash(tweetImg));
+  int get hashCode => Object.hash(runtimeType, coverImg, profileImg, tweetImg);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ImageStateCopyWith<_$_ImageState> get copyWith =>
       __$$_ImageStateCopyWithImpl<_$_ImageState>(this, _$identity);
 }

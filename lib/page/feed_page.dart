@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/controller/tweet_controller.dart';
-import 'package:twitter_clone2/page/create_tweet.dart';
-import 'package:twitter_clone2/page/notifications_page.dart';
-import 'package:twitter_clone2/page/profile_page.dart';
-import 'package:twitter_clone2/page/search_page.dart';
-import 'package:twitter_clone2/page/timeline_page.dart';
-import 'package:twitter_clone2/util/color.dart';
+import 'package:twiiter_clone2/controller/tweet_controller.dart';
+import 'package:twiiter_clone2/page/create_tweet.dart';
+import 'package:twiiter_clone2/page/notifications_page.dart';
+import 'package:twiiter_clone2/page/profile_page.dart';
+import 'package:twiiter_clone2/page/search_page.dart';
+import 'package:twiiter_clone2/page/timeline_page.dart';
+import 'package:twiiter_clone2/util/color.dart';
 
 class FeedPage extends ConsumerStatefulWidget {
   const FeedPage(this.uid, {Key? key}) : super(key: key);

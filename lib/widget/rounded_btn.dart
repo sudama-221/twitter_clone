@@ -1,7 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:twitter_clone2/util/color.dart';
+import 'package:twiiter_clone2/util/color.dart';
 
 class RoundedBtn extends StatelessWidget {
   final String btnText;

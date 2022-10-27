@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/controller/base_auth_controller.dart';
-import 'package:twitter_clone2/model/tweet_state.dart';
+import 'package:twiiter_clone2/controller/base_auth_controller.dart';
+import 'package:twiiter_clone2/model/tweet_state.dart';
 import 'package:uuid/uuid.dart';
 
 abstract class BaseTweetRepository {
@@ -15,12 +15,12 @@ abstract class BaseTweetRepository {
 }
 
 final tweetRepositoryProvider = Provider.autoDispose<TweetRepository>((ref) {
-  return TweetRepository(ref.read);
+  return TweetRepository(ref);
 });
 
 class TweetRepository implements BaseTweetRepository {
-  final Reader _read;
-  const TweetRepository(this._read);
+  final Ref _ref;
+  const TweetRepository(this._ref);
 
   // ツイートにある画像をfirestorageへ
   @override
@@ -32,7 +32,8 @@ class TweetRepository implements BaseTweetRepository {
         contentType: 'image/jpeg',
         customMetadata: {'picked-file-path': imgFile.path});
     UploadTask uploadTask;
-    Reference ref = _read(firebaseStorageProvider)
+    Reference ref = _ref
+        .read(firebaseStorageProvider)
         .ref()
         .child('tweets')
         .child('/tweet$uniquePhotoId.jpg');
@@ -50,7 +51,7 @@ class TweetRepository implements BaseTweetRepository {
   // ツイート作成
   @override
   Future<void> createTweet(TweetState tweetState) async {
-    DocumentReference doc = _read(tweetRef).doc();
+    DocumentReference doc = _ref.read(tweetRef).doc();
     await doc.set({
       'text': tweetState.text,
       'image': tweetState.imageUrl,
@@ -64,7 +65,8 @@ class TweetRepository implements BaseTweetRepository {
   // ユーザーを指定してツイートを取得
   @override
   Future<List<TweetState>> getUserTweets(String userId) async {
-    QuerySnapshot snapshot = await _read(tweetRef)
+    QuerySnapshot snapshot = await _ref
+        .read(tweetRef)
         .where('authorId', isEqualTo: userId)
         .orderBy('timestamp', descending: true)
         .get();
@@ -81,7 +83,8 @@ class TweetRepository implements BaseTweetRepository {
     List<TweetState> followingUserTweetList = <TweetState>[]; // ツイートを格納
 
     getTweet(String uid) async {
-      QuerySnapshot userTweetsSnap = await _read(tweetRef)
+      QuerySnapshot userTweetsSnap = await _ref
+          .read(tweetRef)
           .where('authorId', isEqualTo: uid)
           .orderBy('timestamp', descending: true)
           .get();
@@ -91,8 +94,11 @@ class TweetRepository implements BaseTweetRepository {
       followingUserTweetList.addAll(userTweets);
     }
 
-    QuerySnapshot followingUserSnap =
-        await _read(followingRef).doc(currentUid).collection('Following').get();
+    QuerySnapshot followingUserSnap = await _ref
+        .read(followingRef)
+        .doc(currentUid)
+        .collection('Following')
+        .get();
 
     // フォローしているユーザーのIDをリスト化
     List<String> followingUserId =

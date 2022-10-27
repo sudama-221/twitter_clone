@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/controller/base_auth_controller.dart';
+import 'package:twiiter_clone2/controller/base_auth_controller.dart';
 
 abstract class BaseUserRepository {
   Future<void> followUser(String currentUserId, String visitedUserId);
@@ -10,23 +10,25 @@ abstract class BaseUserRepository {
 }
 
 final userRepositoryProvider = Provider<UserRepository>((ref) {
-  return UserRepository(ref.read);
+  return UserRepository(ref);
 });
 
 class UserRepository implements BaseUserRepository {
-  final Reader _read;
-  const UserRepository(this._read);
+  final Ref _ref;
+  UserRepository(this._ref);
 
   // フォローする
   @override
   Future<void> followUser(String currentUserId, String visitedUserId) async {
-    await _read(followingRef)
+    await _ref
+        .read(followingRef)
         .doc(currentUserId)
         .collection('Following')
         .doc(visitedUserId)
         .set({});
 
-    await _read(followerRef)
+    await _ref
+        .read(followerRef)
         .doc(visitedUserId)
         .collection('Followers')
         .doc(currentUserId)
@@ -36,7 +38,8 @@ class UserRepository implements BaseUserRepository {
   // フォロー外す
   @override
   Future<void> unFollowUser(String currentUserId, String visitedUserId) async {
-    await _read(followingRef)
+    await _ref
+        .read(followingRef)
         .doc(currentUserId)
         .collection('Following')
         .doc(visitedUserId)
@@ -49,7 +52,8 @@ class UserRepository implements BaseUserRepository {
       },
     );
 
-    await _read(followerRef)
+    await _ref
+        .read(followerRef)
         .doc(visitedUserId)
         .collection('Followers')
         .doc(currentUserId)
@@ -65,7 +69,8 @@ class UserRepository implements BaseUserRepository {
 
   @override
   Future<QuerySnapshot> searchUser(String name) async {
-    QuerySnapshot users = await _read(userRef)
+    QuerySnapshot users = await _ref
+        .read(userRef)
         .where('name', isGreaterThanOrEqualTo: name)
         .where('name', isLessThan: '${name}z')
         .get();
@@ -76,7 +81,8 @@ class UserRepository implements BaseUserRepository {
   @override
   Future<bool> isFollowingUser(
       String currentUserId, String visitedUserId) async {
-    DocumentSnapshot followingDoc = await _read(followerRef)
+    DocumentSnapshot followingDoc = await _ref
+        .read(followerRef)
         .doc(visitedUserId)
         .collection('Followers')
         .doc(currentUserId)

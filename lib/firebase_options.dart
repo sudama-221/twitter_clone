@@ -44,39 +44,39 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDt8_FLm_F3efdevhO2u8DjwOKtVJHQAmc',
-    appId: '1:689347154771:web:f943a2d04f1236b436c7a6',
-    messagingSenderId: '689347154771',
-    projectId: 'twitter-clone-5398c',
-    authDomain: 'twitter-clone-5398c.firebaseapp.com',
-    storageBucket: 'twitter-clone-5398c.appspot.com',
+    apiKey: 'AIzaSyAGqUP661ECwjakBilw5eeFjJAfUlFsNoo',
+    appId: '1:911203065805:web:2cd80dc03dac10c68d2e84',
+    messagingSenderId: '911203065805',
+    projectId: 'twitter2-4bbd9',
+    authDomain: 'twitter2-4bbd9.firebaseapp.com',
+    storageBucket: 'twitter2-4bbd9.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAQgPDpZvT5c4sf8lyL9zkpgeefbgrV5CM',
-    appId: '1:689347154771:android:6c05713136da639536c7a6',
-    messagingSenderId: '689347154771',
-    projectId: 'twitter-clone-5398c',
-    storageBucket: 'twitter-clone-5398c.appspot.com',
+    apiKey: 'AIzaSyCz_vCZYs1Qd1BbKJJdiYZXjGHkD7eMAic',
+    appId: '1:911203065805:android:2c5291688007c1f78d2e84',
+    messagingSenderId: '911203065805',
+    projectId: 'twitter2-4bbd9',
+    storageBucket: 'twitter2-4bbd9.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBbo6RoAr3dIOhjXTOjuEbJbQjGnS7uXd0',
-    appId: '1:689347154771:ios:dd022c04b102864f36c7a6',
-    messagingSenderId: '689347154771',
-    projectId: 'twitter-clone-5398c',
-    storageBucket: 'twitter-clone-5398c.appspot.com',
-    iosClientId: '689347154771-v6rv9miioav5unf20tjiifv44a8ikbkg.apps.googleusercontent.com',
-    iosBundleId: 'com.example.twitterClone2',
+    apiKey: 'AIzaSyA-hK8IbYwpV5TcGxHcUc7nruxQNfNa6ak',
+    appId: '1:911203065805:ios:23b2f87ce88fe26f8d2e84',
+    messagingSenderId: '911203065805',
+    projectId: 'twitter2-4bbd9',
+    storageBucket: 'twitter2-4bbd9.appspot.com',
+    iosClientId: '911203065805-l7cidsv413jhfrn1romuetj2gk10qp6t.apps.googleusercontent.com',
+    iosBundleId: 'com.example.twiiterClone2',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBbo6RoAr3dIOhjXTOjuEbJbQjGnS7uXd0',
-    appId: '1:689347154771:ios:dd022c04b102864f36c7a6',
-    messagingSenderId: '689347154771',
-    projectId: 'twitter-clone-5398c',
-    storageBucket: 'twitter-clone-5398c.appspot.com',
-    iosClientId: '689347154771-v6rv9miioav5unf20tjiifv44a8ikbkg.apps.googleusercontent.com',
-    iosBundleId: 'com.example.twitterClone2',
+    apiKey: 'AIzaSyA-hK8IbYwpV5TcGxHcUc7nruxQNfNa6ak',
+    appId: '1:911203065805:ios:23b2f87ce88fe26f8d2e84',
+    messagingSenderId: '911203065805',
+    projectId: 'twitter2-4bbd9',
+    storageBucket: 'twitter2-4bbd9.appspot.com',
+    iosClientId: '911203065805-l7cidsv413jhfrn1romuetj2gk10qp6t.apps.googleusercontent.com',
+    iosBundleId: 'com.example.twiiterClone2',
   );
 }

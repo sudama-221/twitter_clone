@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/controller/user_controller.dart';
-import 'package:twitter_clone2/widget/user_tile.dart';
+import 'package:twiiter_clone2/controller/user_controller.dart';
+import 'package:twiiter_clone2/widget/user_tile.dart';
 
 class SearchPage extends ConsumerStatefulWidget {
   const SearchPage({

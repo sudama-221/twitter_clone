@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/controller/base_auth_controller.dart';
-import 'package:twitter_clone2/model/user_state.dart';
-import 'package:twitter_clone2/repository/auth_repository.dart';
-import 'package:twitter_clone2/repository/user_repository.dart';
+import 'package:twiiter_clone2/controller/base_auth_controller.dart';
+import 'package:twiiter_clone2/model/user_state.dart';
+import 'package:twiiter_clone2/repository/auth_repository.dart';
+import 'package:twiiter_clone2/repository/user_repository.dart';
 
 // 取得したユーザーIDから情報を受け取る
 final userStateProvider =
@@ -21,12 +21,12 @@ final userStateProvider =
 
 final userUpdateProvider =
     StateNotifierProvider<userUpdateNotifier, List<UserState>?>((ref) {
-  return userUpdateNotifier(ref.read);
+  return userUpdateNotifier(ref);
 });
 
 class userUpdateNotifier extends StateNotifier<List<UserState>?> {
-  final Reader _read;
-  userUpdateNotifier(this._read) : super(null);
+  final Ref _ref;
+  userUpdateNotifier(this._ref) : super(null);
 
   String? _name;
   String? _discription;
@@ -40,7 +40,8 @@ class userUpdateNotifier extends StateNotifier<List<UserState>?> {
         contentType: 'image/jpeg',
         customMetadata: {'picked-file-path': imgFile.path});
     UploadTask uploadTask;
-    Reference ref = _read(firebaseStorageProvider)
+    Reference ref = _ref
+        .read(firebaseStorageProvider)
         .ref()
         .child('users')
         .child('/$fileType$uid.jpg');
@@ -57,7 +58,7 @@ class userUpdateNotifier extends StateNotifier<List<UserState>?> {
 
   Future<void> updateProfile(String uid, String? name, String? discription,
       String profileImg, String coverImg) async {
-    await _read(userRef).doc(uid).update({
+    await _ref.read(userRef).doc(uid).update({
       'name': name,
       'discription': discription,
       'profileImageUrl': profileImg,
@@ -67,7 +68,7 @@ class userUpdateNotifier extends StateNotifier<List<UserState>?> {
 
   Future<void> searchUser(String name) async {
     QuerySnapshot querySnapshot =
-        await _read(userRepositoryProvider).searchUser(name);
+        await _ref.read(userRepositoryProvider).searchUser(name);
     if (querySnapshot.size > 0) {
       final userList =
           querySnapshot.docs.map((doc) => UserState.fromDoc(doc)).toList();

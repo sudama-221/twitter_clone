@@ -17,7 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LikesState {
   String? get userId => throw _privateConstructorUsedError;
-  TweetState? get tweet => throw _privateConstructorUsedError;
+  String? get tweetId => throw _privateConstructorUsedError;
+  bool? get isLiked => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LikesStateCopyWith<LikesState> get copyWith =>
@@ -28,46 +29,42 @@ mixin _$LikesState {
 abstract class $LikesStateCopyWith<$Res> {
   factory $LikesStateCopyWith(
           LikesState value, $Res Function(LikesState) then) =
-      _$LikesStateCopyWithImpl<$Res>;
-  $Res call({String? userId, TweetState? tweet});
-
-  $TweetStateCopyWith<$Res>? get tweet;
+      _$LikesStateCopyWithImpl<$Res, LikesState>;
+  @useResult
+  $Res call({String? userId, String? tweetId, bool? isLiked});
 }
 
 /// @nodoc
-class _$LikesStateCopyWithImpl<$Res> implements $LikesStateCopyWith<$Res> {
+class _$LikesStateCopyWithImpl<$Res, $Val extends LikesState>
+    implements $LikesStateCopyWith<$Res> {
   _$LikesStateCopyWithImpl(this._value, this._then);
 
-  final LikesState _value;
   // ignore: unused_field
-  final $Res Function(LikesState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? userId = freezed,
-    Object? tweet = freezed,
+    Object? tweetId = freezed,
+    Object? isLiked = freezed,
   }) {
     return _then(_value.copyWith(
-      userId: userId == freezed
+      userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      tweet: tweet == freezed
-          ? _value.tweet
-          : tweet // ignore: cast_nullable_to_non_nullable
-              as TweetState?,
-    ));
-  }
-
-  @override
-  $TweetStateCopyWith<$Res>? get tweet {
-    if (_value.tweet == null) {
-      return null;
-    }
-
-    return $TweetStateCopyWith<$Res>(_value.tweet!, (value) {
-      return _then(_value.copyWith(tweet: value));
-    });
+      tweetId: freezed == tweetId
+          ? _value.tweetId
+          : tweetId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isLiked: freezed == isLiked
+          ? _value.isLiked
+          : isLiked // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ) as $Val);
   }
 }
 
@@ -78,36 +75,38 @@ abstract class _$$_LikesStateCopyWith<$Res>
           _$_LikesState value, $Res Function(_$_LikesState) then) =
       __$$_LikesStateCopyWithImpl<$Res>;
   @override
-  $Res call({String? userId, TweetState? tweet});
-
-  @override
-  $TweetStateCopyWith<$Res>? get tweet;
+  @useResult
+  $Res call({String? userId, String? tweetId, bool? isLiked});
 }
 
 /// @nodoc
-class __$$_LikesStateCopyWithImpl<$Res> extends _$LikesStateCopyWithImpl<$Res>
+class __$$_LikesStateCopyWithImpl<$Res>
+    extends _$LikesStateCopyWithImpl<$Res, _$_LikesState>
     implements _$$_LikesStateCopyWith<$Res> {
   __$$_LikesStateCopyWithImpl(
       _$_LikesState _value, $Res Function(_$_LikesState) _then)
-      : super(_value, (v) => _then(v as _$_LikesState));
+      : super(_value, _then);
 
-  @override
-  _$_LikesState get _value => super._value as _$_LikesState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? userId = freezed,
-    Object? tweet = freezed,
+    Object? tweetId = freezed,
+    Object? isLiked = freezed,
   }) {
     return _then(_$_LikesState(
-      userId: userId == freezed
+      userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      tweet: tweet == freezed
-          ? _value.tweet
-          : tweet // ignore: cast_nullable_to_non_nullable
-              as TweetState?,
+      tweetId: freezed == tweetId
+          ? _value.tweetId
+          : tweetId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isLiked: freezed == isLiked
+          ? _value.isLiked
+          : isLiked // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -115,16 +114,18 @@ class __$$_LikesStateCopyWithImpl<$Res> extends _$LikesStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LikesState implements _LikesState {
-  const _$_LikesState({this.userId, this.tweet});
+  const _$_LikesState({this.userId, this.tweetId, this.isLiked});
 
   @override
   final String? userId;
   @override
-  final TweetState? tweet;
+  final String? tweetId;
+  @override
+  final bool? isLiked;
 
   @override
   String toString() {
-    return 'LikesState(userId: $userId, tweet: $tweet)';
+    return 'LikesState(userId: $userId, tweetId: $tweetId, isLiked: $isLiked)';
   }
 
   @override
@@ -132,30 +133,33 @@ class _$_LikesState implements _LikesState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LikesState &&
-            const DeepCollectionEquality().equals(other.userId, userId) &&
-            const DeepCollectionEquality().equals(other.tweet, tweet));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.tweetId, tweetId) || other.tweetId == tweetId) &&
+            (identical(other.isLiked, isLiked) || other.isLiked == isLiked));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(userId),
-      const DeepCollectionEquality().hash(tweet));
+  int get hashCode => Object.hash(runtimeType, userId, tweetId, isLiked);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LikesStateCopyWith<_$_LikesState> get copyWith =>
       __$$_LikesStateCopyWithImpl<_$_LikesState>(this, _$identity);
 }
 
 abstract class _LikesState implements LikesState {
-  const factory _LikesState({final String? userId, final TweetState? tweet}) =
-      _$_LikesState;
+  const factory _LikesState(
+      {final String? userId,
+      final String? tweetId,
+      final bool? isLiked}) = _$_LikesState;
 
   @override
   String? get userId;
   @override
-  TweetState? get tweet;
+  String? get tweetId;
+  @override
+  bool? get isLiked;
   @override
   @JsonKey(ignore: true)
   _$$_LikesStateCopyWith<_$_LikesState> get copyWith =>

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/controller/auth_controller.dart';
-import 'package:twitter_clone2/page/auth_check.dart';
-import 'package:twitter_clone2/util/color.dart';
-import 'package:twitter_clone2/widget/rounded_btn.dart';
+import 'package:twiiter_clone2/controller/auth_controller.dart';
+import 'package:twiiter_clone2/page/auth_check.dart';
+import 'package:twiiter_clone2/util/color.dart';
+import 'package:twiiter_clone2/widget/rounded_btn.dart';
 
 class RegisterPage extends ConsumerWidget {
   const RegisterPage({super.key});

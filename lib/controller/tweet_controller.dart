@@ -1,10 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/model/tweet_state.dart';
-import 'package:twitter_clone2/model/user_state.dart';
-import 'package:twitter_clone2/repository/like_repository.dart';
-import 'package:twitter_clone2/repository/tweet_repository.dart';
+import 'package:twiiter_clone2/model/tweet_state.dart';
+import 'package:twiiter_clone2/repository/tweet_repository.dart';
 
 // プロフィールページのツイート取得　useridで取得する
 final userTweetListProvider = FutureProvider.autoDispose
@@ -50,7 +48,7 @@ final tweetProvider =
 });
 
 class tweetNotifier extends StateNotifier<List<TweetState>?> {
-  final Reader _read;
+  final _read;
   tweetNotifier(this._read) : super(null);
 
   Future<String> tweetImgUpload(File imgFile) async {

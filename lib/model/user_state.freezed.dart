@@ -36,7 +36,8 @@ mixin _$UserState {
 /// @nodoc
 abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
-      _$UserStateCopyWithImpl<$Res>;
+      _$UserStateCopyWithImpl<$Res, UserState>;
+  @useResult
   $Res call(
       {String? uid,
       String? email,
@@ -47,13 +48,16 @@ abstract class $UserStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
+class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
+    implements $UserStateCopyWith<$Res> {
   _$UserStateCopyWithImpl(this._value, this._then);
 
-  final UserState _value;
   // ignore: unused_field
-  final $Res Function(UserState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? uid = freezed,
@@ -64,31 +68,31 @@ class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
     Object? coverImageUrl = freezed,
   }) {
     return _then(_value.copyWith(
-      uid: uid == freezed
+      uid: freezed == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String?,
-      email: email == freezed
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      discription: discription == freezed
+      discription: freezed == discription
           ? _value.discription
           : discription // ignore: cast_nullable_to_non_nullable
               as String?,
-      profileImageUrl: profileImageUrl == freezed
+      profileImageUrl: freezed == profileImageUrl
           ? _value.profileImageUrl
           : profileImageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      coverImageUrl: coverImageUrl == freezed
+      coverImageUrl: freezed == coverImageUrl
           ? _value.coverImageUrl
           : coverImageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -98,6 +102,7 @@ abstract class _$$_UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
           _$_UserState value, $Res Function(_$_UserState) then) =
       __$$_UserStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? uid,
       String? email,
@@ -108,15 +113,14 @@ abstract class _$$_UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
+class __$$_UserStateCopyWithImpl<$Res>
+    extends _$UserStateCopyWithImpl<$Res, _$_UserState>
     implements _$$_UserStateCopyWith<$Res> {
   __$$_UserStateCopyWithImpl(
       _$_UserState _value, $Res Function(_$_UserState) _then)
-      : super(_value, (v) => _then(v as _$_UserState));
+      : super(_value, _then);
 
-  @override
-  _$_UserState get _value => super._value as _$_UserState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? uid = freezed,
@@ -127,27 +131,27 @@ class __$$_UserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
     Object? coverImageUrl = freezed,
   }) {
     return _then(_$_UserState(
-      uid: uid == freezed
+      uid: freezed == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String?,
-      email: email == freezed
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      discription: discription == freezed
+      discription: freezed == discription
           ? _value.discription
           : discription // ignore: cast_nullable_to_non_nullable
               as String?,
-      profileImageUrl: profileImageUrl == freezed
+      profileImageUrl: freezed == profileImageUrl
           ? _value.profileImageUrl
           : profileImageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      coverImageUrl: coverImageUrl == freezed
+      coverImageUrl: freezed == coverImageUrl
           ? _value.coverImageUrl
           : coverImageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -192,30 +196,25 @@ class _$_UserState implements _UserState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserState &&
-            const DeepCollectionEquality().equals(other.uid, uid) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality()
-                .equals(other.discription, discription) &&
-            const DeepCollectionEquality()
-                .equals(other.profileImageUrl, profileImageUrl) &&
-            const DeepCollectionEquality()
-                .equals(other.coverImageUrl, coverImageUrl));
+            (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.discription, discription) ||
+                other.discription == discription) &&
+            (identical(other.profileImageUrl, profileImageUrl) ||
+                other.profileImageUrl == profileImageUrl) &&
+            (identical(other.coverImageUrl, coverImageUrl) ||
+                other.coverImageUrl == coverImageUrl));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(uid),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(discription),
-      const DeepCollectionEquality().hash(profileImageUrl),
-      const DeepCollectionEquality().hash(coverImageUrl));
+  int get hashCode => Object.hash(runtimeType, uid, email, name, discription,
+      profileImageUrl, coverImageUrl);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserStateCopyWith<_$_UserState> get copyWith =>
       __$$_UserStateCopyWithImpl<_$_UserState>(this, _$identity);
 

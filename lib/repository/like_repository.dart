@@ -1,59 +1,57 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/controller/base_auth_controller.dart';
-import 'package:twitter_clone2/model/tweet_state.dart';
-import 'package:twitter_clone2/model/user_state.dart';
+import 'package:twiiter_clone2/controller/base_auth_controller.dart';
 
 abstract class BaseLikeRepository {
-  Future<void> likeTweet(TweetState tweetState, UserState userState);
-  Future<void> unLikeTweet(TweetState tweetState, UserState userState);
-  Future<bool> isLikedTweet(TweetState tweetState, String userId);
+  Future<void> likeTweet(String tweetId, String currentUserId);
+  Future<void> unLikeTweet(String tweetId, String currentUserId);
+  Future<bool> isLikedTweet(String tweetId, String currentUserId);
 }
 
 final likesRepositoryProvider = Provider.autoDispose<LikeRepository>((ref) {
-  return LikeRepository(ref.read);
+  return LikeRepository(ref);
 });
 
 class LikeRepository implements BaseLikeRepository {
-  final Reader _read;
-  const LikeRepository(this._read);
+  final Ref _ref;
+  const LikeRepository(this._ref);
 
   // いいねする
   @override
-  Future<void> likeTweet(TweetState tweetState, UserState userState) async {
+  Future<void> likeTweet(String tweetId, String currentUserId) async {
     // いいねしたツイートにいいね数を1足す
-    print('repo:${tweetState.likes!}');
-    final tweetDoc = _read(tweetRef).doc(tweetState.id);
-    tweetDoc.update({'likes': FieldValue.increment(1)});
-
+    final tweetDoc = _ref.read(tweetRef).doc(tweetId);
+    await tweetDoc.update({'likes': FieldValue.increment(1)});
     // ツイートに紐づくいいねしたユーザーを追加
-    await _read(tweetLikesUsersRef)
-        .doc(tweetState.id)
+    await _ref
+        .read(tweetLikesUsersRef)
+        .doc(tweetId)
         .collection('users')
-        .doc(userState.uid)
+        .doc(currentUserId)
         .set({});
 
     // ユーザーにいいねしたツイートを追加
-    await _read(userLikesRef)
-        .doc(userState.uid)
+    await _ref
+        .read(userLikesRef)
+        .doc(currentUserId)
         .collection('tweet')
-        .doc(tweetState.id)
+        .doc(tweetId)
         .set({});
   }
 
   // いいねを外す
   @override
-  Future<void> unLikeTweet(TweetState tweetState, UserState userState) async {
-    // いいねしたツイートにいいね数を1足す
-    await _read(tweetRef)
-        .doc(tweetState.id)
-        .update({'likes': tweetState.likes! - 1});
+  Future<void> unLikeTweet(String tweetId, String currentUserId) async {
+    // いいねしたツイートにいいね数を１引く
+    final tweetDoc = _ref.read(tweetRef).doc(tweetId);
+    await tweetDoc.update({'likes': FieldValue.increment(-1)});
 
     // ツイートに紐づくいいねしたユーザーを追加
-    await _read(tweetLikesUsersRef)
-        .doc(tweetState.id)
+    await _ref
+        .read(tweetLikesUsersRef)
+        .doc(tweetId)
         .collection('users')
-        .doc(userState.uid)
+        .doc(currentUserId)
         .get()
         .then((doc) {
       if (doc.exists) {
@@ -62,10 +60,11 @@ class LikeRepository implements BaseLikeRepository {
     });
 
     // ユーザーにいいねしたツイートを追加
-    await _read(userLikesRef)
-        .doc(userState.uid)
+    await _ref
+        .read(userLikesRef)
+        .doc(currentUserId)
         .collection('tweet')
-        .doc(tweetState.id)
+        .doc(tweetId)
         .get()
         .then((doc) {
       if (doc.exists) {
@@ -76,12 +75,14 @@ class LikeRepository implements BaseLikeRepository {
 
   // いいねしているかチェック
   @override
-  Future<bool> isLikedTweet(TweetState tweetState, String userId) async {
-    DocumentSnapshot likedDoc = await _read(tweetLikesUsersRef)
-        .doc(tweetState.id)
+  Future<bool> isLikedTweet(String tweetId, String currentUserId) async {
+    DocumentSnapshot likedDoc = await _ref
+        .read(tweetLikesUsersRef)
+        .doc(tweetId)
         .collection('users')
-        .doc(userId)
+        .doc(currentUserId)
         .get();
+    print('repo: ${likedDoc.exists}');
     return likedDoc.exists;
   }
 }

@@ -1,10 +1,8 @@
 import 'dart:math';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/controller/base_auth_controller.dart';
-import 'package:twitter_clone2/model/user_state.dart';
+import 'package:twiiter_clone2/controller/base_auth_controller.dart';
+import 'package:twiiter_clone2/model/user_state.dart';
 
 final firebaseAuthProvider = Provider((ref) {
   return FirebaseAuth.instance;
@@ -20,21 +18,22 @@ abstract class BaseAuthRepository {
 }
 
 final authRepositoryProvider = Provider.autoDispose<AuthRepository>((ref) {
-  return AuthRepository(ref.read);
+  return AuthRepository(ref);
 });
 
 class AuthRepository implements BaseAuthRepository {
-  final Reader _read;
-  const AuthRepository(this._read);
+  final Ref _ref;
+  const AuthRepository(this._ref);
 
   @override
   Stream<User?> get authStateChanges =>
-      _read(firebaseAuthProvider).authStateChanges();
+      _ref.read(firebaseAuthProvider).authStateChanges();
 
   // ログインしているユーザー情報
   @override
   Future<UserState> feachUser(String uid) async {
-    final doc = _read(firebaseFirestoreProvider).collection('users').doc(uid);
+    final doc =
+        _ref.read(firebaseFirestoreProvider).collection('users').doc(uid);
     final data = await doc.get();
 
     return UserState.fromDoc(data);
@@ -44,7 +43,8 @@ class AuthRepository implements BaseAuthRepository {
   @override
   Future<void> signInWithEmail(String email, String password) async {
     try {
-      await _read(firebaseAuthProvider)
+      await _ref
+          .read(firebaseAuthProvider)
           .signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       throw convertAuthError(e.code);
@@ -55,7 +55,8 @@ class AuthRepository implements BaseAuthRepository {
   @override
   Future<UserCredential> signUp(String email, String password) async {
     try {
-      final result = await _read(firebaseAuthProvider)
+      final result = await _ref
+          .read(firebaseAuthProvider)
           .createUserWithEmailAndPassword(email: email, password: password);
       return result;
     } on FirebaseAuthException catch (e) {
@@ -67,7 +68,7 @@ class AuthRepository implements BaseAuthRepository {
   @override
   User? getCurrentUser() {
     try {
-      return _read(firebaseAuthProvider).currentUser;
+      return _ref.read(firebaseAuthProvider).currentUser;
     } on FirebaseAuthException catch (e) {
       throw convertAuthError(e.code);
     }
@@ -77,7 +78,7 @@ class AuthRepository implements BaseAuthRepository {
   @override
   Future<void> signOut() async {
     try {
-      await _read(firebaseAuthProvider).signOut();
+      await _ref.read(firebaseAuthProvider).signOut();
     } on FirebaseAuthException catch (e) {
       throw convertAuthError(e.code);
     }

@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/model/user_state.dart';
-import 'package:twitter_clone2/repository/auth_repository.dart';
+import 'package:twiiter_clone2/model/user_state.dart';
+import 'package:twiiter_clone2/repository/auth_repository.dart';
 
 // 現在のログイン情報を監視
 final authStateProvider = StreamProvider.autoDispose<User?>((ref) {
@@ -14,31 +14,31 @@ final authStateProvider = StreamProvider.autoDispose<User?>((ref) {
 // ログイン関係の処理
 final currentUserProvider =
     StateNotifierProvider<currentUserControllerNotifier, User?>((ref) {
-  return currentUserControllerNotifier(ref.read);
+  return currentUserControllerNotifier(ref);
 });
 
 class currentUserControllerNotifier extends StateNotifier<User?> {
-  final Reader _read;
-  currentUserControllerNotifier(this._read) : super(null);
+  final Ref _ref;
+  currentUserControllerNotifier(this._ref) : super(null);
 
-  User? get state => _read(authRepositoryProvider).getCurrentUser();
+  User? get state => _ref.read(authRepositoryProvider).getCurrentUser();
 }
 
 // ログイン関係の処理
 final authControllerProvider =
     StateNotifierProvider<AuthControllerNotifier, UserState?>((ref) {
-  return AuthControllerNotifier(ref.read);
+  return AuthControllerNotifier(ref);
 });
 
 class AuthControllerNotifier extends StateNotifier<UserState?> {
-  final Reader _read;
-  AuthControllerNotifier(this._read) : super(null);
+  final Ref _ref;
+  AuthControllerNotifier(this._ref) : super(null);
 
   // 新規登録
   Future<void> signUp(String name, String email, String password) async {
     try {
       final userCredential =
-          await _read(authRepositoryProvider).signUp(email, password);
+          await _ref.read(authRepositoryProvider).signUp(email, password);
 
       final user = userCredential.user;
       if (user != null) {
@@ -63,13 +63,13 @@ class AuthControllerNotifier extends StateNotifier<UserState?> {
   // ログイン
   Future<void> signIn(String email, String password) async {
     try {
-      await _read(authRepositoryProvider).signInWithEmail(email, password);
+      await _ref.read(authRepositoryProvider).signInWithEmail(email, password);
     } catch (e) {
       throw e.toString();
     }
   }
 
   void siginOut() async {
-    await _read(authRepositoryProvider).signOut();
+    await _ref.read(authRepositoryProvider).signOut();
   }
 }

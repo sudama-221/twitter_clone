@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/controller/auth_controller.dart';
-import 'package:twitter_clone2/model/user_state.dart';
-import 'package:twitter_clone2/page/profile_page.dart';
+import 'package:twiiter_clone2/controller/auth_controller.dart';
+import 'package:twiiter_clone2/model/user_state.dart';
+import 'package:twiiter_clone2/page/profile_page.dart';
 
 class UserTile extends ConsumerWidget {
   const UserTile({super.key, required this.user});

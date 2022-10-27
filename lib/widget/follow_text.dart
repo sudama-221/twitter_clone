@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/controller/follow_controller.dart';
+import 'package:twiiter_clone2/controller/follow_controller.dart';
 
 class FollowText extends ConsumerWidget {
   final String uid;

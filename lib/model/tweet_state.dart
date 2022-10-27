@@ -14,6 +14,8 @@ class TweetState with _$TweetState {
     String? imageUrl,
     int? likes,
     int? retweets,
+    bool? isLiked, // ログインしているユーザーがいいねしているか
+    bool? isRetweet, // ログインしているユーザーがリツイートしているか
   }) = _TweetState;
 
   factory TweetState.fromDoc(DocumentSnapshot doc) {

@@ -1,18 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/controller/auth_controller.dart';
-import 'package:twitter_clone2/controller/follow_controller.dart';
-import 'package:twitter_clone2/controller/tweet_controller.dart';
-import 'package:twitter_clone2/controller/user_controller.dart';
-import 'package:twitter_clone2/model/tweet_state.dart';
-import 'package:twitter_clone2/model/user_state.dart';
-import 'package:twitter_clone2/page/auth_check.dart';
-import 'package:twitter_clone2/page/edit_profile_page.dart';
-import 'package:twitter_clone2/util/color.dart';
-import 'package:twitter_clone2/widget/follow_btn.dart';
-import 'package:twitter_clone2/widget/follow_text.dart';
-import 'package:twitter_clone2/widget/tweet_container.dart';
+import 'package:twiiter_clone2/controller/auth_controller.dart';
+import 'package:twiiter_clone2/controller/follow_controller.dart';
+import 'package:twiiter_clone2/controller/tweet_controller.dart';
+import 'package:twiiter_clone2/controller/user_controller.dart';
+import 'package:twiiter_clone2/model/user_state.dart';
+import 'package:twiiter_clone2/page/auth_check.dart';
+import 'package:twiiter_clone2/page/edit_profile_page.dart';
+import 'package:twiiter_clone2/util/color.dart';
+import 'package:twiiter_clone2/widget/follow_btn.dart';
+import 'package:twiiter_clone2/widget/follow_text.dart';
+import 'package:twiiter_clone2/widget/tweet_container.dart';
 
 class ProfilePage extends ConsumerWidget {
   final String uid;

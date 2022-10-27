@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/controller/tweet_controller.dart';
-import 'package:twitter_clone2/controller/user_controller.dart';
-import 'package:twitter_clone2/widget/tweet_container.dart';
+import 'package:twiiter_clone2/controller/tweet_controller.dart';
+import 'package:twiiter_clone2/controller/user_controller.dart';
+import 'package:twiiter_clone2/widget/tweet_container.dart';
 
 class TimelinePage extends StatelessWidget {
   final String currentUserId;

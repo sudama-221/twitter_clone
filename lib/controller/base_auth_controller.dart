@@ -35,3 +35,7 @@ final userLikesRef = Provider<CollectionReference>((ref) {
 final tweetLikesUsersRef = Provider<CollectionReference>((ref) {
   return ref.watch(firebaseFirestoreProvider).collection(('tweetLikeUsers'));
 });
+// 通知
+final activitiesRef = Provider<CollectionReference>((ref) {
+  return ref.watch(firebaseFirestoreProvider).collection(('activities'));
+});

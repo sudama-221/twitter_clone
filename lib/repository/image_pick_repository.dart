@@ -9,12 +9,12 @@ abstract class BaseImagePickRepository {
 }
 
 final imageRepositoryProvider = Provider<ImagePickRepository>((ref) {
-  return ImagePickRepository(ref.read);
+  return ImagePickRepository(ref);
 });
 
 class ImagePickRepository implements BaseImagePickRepository {
-  final Reader _read;
-  ImagePickRepository(this._read);
+  final Ref _ref;
+  ImagePickRepository(this._ref);
 
   File? imgFile;
 

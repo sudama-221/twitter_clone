@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone2/page/login_page.dart';
-import 'package:twitter_clone2/page/register_page.dart';
-import 'package:twitter_clone2/widget/rounded_btn.dart';
+import 'package:twiiter_clone2/page/login_page.dart';
+import 'package:twiiter_clone2/page/register_page.dart';
+import 'package:twiiter_clone2/widget/rounded_btn.dart';
 
 class WelcomePage extends ConsumerWidget {
   const WelcomePage({super.key});
