@@ -44,39 +44,39 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAGqUP661ECwjakBilw5eeFjJAfUlFsNoo',
-    appId: '1:911203065805:web:2cd80dc03dac10c68d2e84',
-    messagingSenderId: '911203065805',
-    projectId: 'twitter2-4bbd9',
-    authDomain: 'twitter2-4bbd9.firebaseapp.com',
-    storageBucket: 'twitter2-4bbd9.appspot.com',
+    apiKey: 'AIzaSyAOZ6YgZOVu55OFtXenLnhTpvZi5lFgz4I',
+    appId: '1:456798194489:web:35a62830a531ef312276e8',
+    messagingSenderId: '456798194489',
+    projectId: 'riverpod-app-b4ea2',
+    authDomain: 'riverpod-app-b4ea2.firebaseapp.com',
+    storageBucket: 'riverpod-app-b4ea2.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCz_vCZYs1Qd1BbKJJdiYZXjGHkD7eMAic',
-    appId: '1:911203065805:android:2c5291688007c1f78d2e84',
-    messagingSenderId: '911203065805',
-    projectId: 'twitter2-4bbd9',
-    storageBucket: 'twitter2-4bbd9.appspot.com',
+    apiKey: 'AIzaSyDOlF9fd3qA5RLN5nd6sfKR9D1-Ngu7lN4',
+    appId: '1:456798194489:android:70f87834ba5768902276e8',
+    messagingSenderId: '456798194489',
+    projectId: 'riverpod-app-b4ea2',
+    storageBucket: 'riverpod-app-b4ea2.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA-hK8IbYwpV5TcGxHcUc7nruxQNfNa6ak',
-    appId: '1:911203065805:ios:23b2f87ce88fe26f8d2e84',
-    messagingSenderId: '911203065805',
-    projectId: 'twitter2-4bbd9',
-    storageBucket: 'twitter2-4bbd9.appspot.com',
-    iosClientId: '911203065805-l7cidsv413jhfrn1romuetj2gk10qp6t.apps.googleusercontent.com',
-    iosBundleId: 'com.example.twiiterClone2',
+    apiKey: 'AIzaSyABm3sybsLhlwimZIvcI_Oi_8Ww63KiKdQ',
+    appId: '1:456798194489:ios:5ae8024dc406d6b12276e8',
+    messagingSenderId: '456798194489',
+    projectId: 'riverpod-app-b4ea2',
+    storageBucket: 'riverpod-app-b4ea2.appspot.com',
+    iosClientId: '456798194489-l43ehn51tpspeie8icn7qfol4lbt7417.apps.googleusercontent.com',
+    iosBundleId: 'com.example.riverpodApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyA-hK8IbYwpV5TcGxHcUc7nruxQNfNa6ak',
-    appId: '1:911203065805:ios:23b2f87ce88fe26f8d2e84',
-    messagingSenderId: '911203065805',
-    projectId: 'twitter2-4bbd9',
-    storageBucket: 'twitter2-4bbd9.appspot.com',
-    iosClientId: '911203065805-l7cidsv413jhfrn1romuetj2gk10qp6t.apps.googleusercontent.com',
-    iosBundleId: 'com.example.twiiterClone2',
+    apiKey: 'AIzaSyABm3sybsLhlwimZIvcI_Oi_8Ww63KiKdQ',
+    appId: '1:456798194489:ios:5ae8024dc406d6b12276e8',
+    messagingSenderId: '456798194489',
+    projectId: 'riverpod-app-b4ea2',
+    storageBucket: 'riverpod-app-b4ea2.appspot.com',
+    iosClientId: '456798194489-l43ehn51tpspeie8icn7qfol4lbt7417.apps.googleusercontent.com',
+    iosBundleId: 'com.example.riverpodApp',
   );
 }

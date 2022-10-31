@@ -1,19 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:riverpod_app/firebase_options.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twiiter_clone2/firebase_options.dart';
-import 'package:twiiter_clone2/page/auth_check.dart';
+import 'package:riverpod_app/page/home_page.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   final firebaseUser = await FirebaseAuth.instance.userChanges().first;
-  runApp(
-    const ProviderScope(child: MyApp()),
-  );
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -23,13 +21,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Flutter Firebase Riverpod',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const AuthCheckPage(),
-      // home: Container1(),
+      home: const HomePage(),
     );
   }
 }
